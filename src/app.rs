@@ -8,6 +8,9 @@ use serde::{
     Serialize,
 };
 use url::Url;
+
+use crate::api;
+
 #[derive(Deserialize, Debug)]
 struct TaskRequest {
     id: u8,
@@ -53,5 +56,7 @@ fn demo(task: Json<TaskRequest>) -> Json<TaskResponse> {
 }
 
 pub fn start() {
-    rocket::ignite().mount("/api", routes![demo]).launch();
+    rocket::ignite()
+        .mount("/api", routes![api::search])
+        .launch();
 }
