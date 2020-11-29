@@ -1,6 +1,12 @@
-use log::{debug, info};
+use log::{
+    debug,
+    info,
+};
 use rocket_contrib::json::Json;
-use serde::{Deserialize, Serialize};
+use serde::{
+    Deserialize,
+    Serialize,
+};
 use url::Url;
 #[derive(Deserialize, Debug)]
 struct TaskRequest {
