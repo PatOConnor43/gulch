@@ -19,7 +19,7 @@ struct TaskResponse {
 }
 
 #[post("/", data = "<task>", format = "json")]
-fn index(task: Json<TaskRequest>) -> Json<TaskResponse> {
+fn demo(task: Json<TaskRequest>) -> Json<TaskResponse> {
     debug!("task: {:?}", task.id);
     std::process::Command::new("vlc")
         .args(&[
@@ -53,5 +53,5 @@ fn index(task: Json<TaskRequest>) -> Json<TaskResponse> {
 }
 
 pub fn start() {
-    rocket::ignite().mount("/", routes![index]).launch();
+    rocket::ignite().mount("/api", routes![demo]).launch();
 }
