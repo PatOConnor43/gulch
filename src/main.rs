@@ -6,6 +6,7 @@ extern crate rocket;
 pub mod api;
 pub mod app;
 pub mod logger;
+pub mod resolver;
 
 fn main() {
     logger::init();

@@ -9,7 +9,10 @@ use serde::{
 };
 use url::Url;
 
-use crate::api;
+use crate::{
+    api,
+    resolver,
+};
 
 #[derive(Deserialize, Debug)]
 struct TaskRequest {
@@ -57,6 +60,7 @@ fn demo(task: Json<TaskRequest>) -> Json<TaskResponse> {
 
 pub fn start() {
     rocket::ignite()
+        .manage(resolver::Resolver::default())
         .mount("/api", routes![api::search])
         .launch();
 }

@@ -8,12 +8,14 @@ edition = "2018"
 
 [dependencies]
 chrono = "0.4"
+config = "^0.10.1"
 fern = "0.5"
 log = "0.4"
 rocket = "^0.4.6"
 reqwest = {version = "^0.10.9", features = ["blocking"]}
 serde = {version = "^1.0.117", features = ["derive"]}
 url = "^2.2.0"
+youtube-api = "^0.1.2"
 
 [dependencies.rocket_contrib]
 version = "^0.4.6"
