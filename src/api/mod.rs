@@ -1,11 +1,19 @@
 use rocket::{
     http::RawStr,
     request::FromParam,
+    response::status::NotFound,
+    State,
 };
 use rocket_contrib::json::Json;
 use serde::{
     Deserialize,
     Serialize,
+};
+
+use crate::{
+    error::ApiError,
+    resolver::Resolver,
+    youtube::Youtube,
 };
 
 #[derive(Deserialize, Debug)]
@@ -26,6 +34,10 @@ impl<'a> FromParam<'a> for SearchRequest<'a> {
 pub struct SearchResponse {}
 
 #[get("/search/<query>", format = "json")]
-pub fn search(query: SearchRequest) -> Json<SearchResponse> {
-    Json(SearchResponse {})
+pub async fn search(
+    query: String,
+    resolver: State<'_, Resolver>,
+) -> Result<Json<SearchResponse>, NotFound<String>> {
+    resolver.youtube().query(&query).await.map_err(|_| NotFound("whoops"));
+    Ok(Json(SearchResponse {}))
 }

@@ -5,10 +5,13 @@ extern crate rocket;
 
 pub mod api;
 pub mod app;
+pub mod error;
 pub mod logger;
 pub mod resolver;
+pub mod youtube;
 
-fn main() {
+#[launch]
+fn rocket() -> rocket::Rocket {
     logger::init();
-    app::start();
+    app::start()
 }

@@ -1,11 +1,19 @@
+use crate::youtube;
 use config::{
     Config,
     File,
 };
 pub struct Resolver {
     config: Config,
+    // These probably could be more generic types but I'm not worried about that right now.
     http_client: reqwest::Client,
-    youtube_client: youtube_api::YoutubeApi,
+    youtube_client: youtube::YoutubeClient,
+}
+
+impl Resolver {
+    pub fn youtube(&self) -> &impl youtube::Youtube {
+        &self.youtube_client
+    }
 }
 
 impl Default for Resolver {
@@ -20,7 +28,7 @@ impl Default for Resolver {
         Resolver {
             config: c,
             http_client: reqwest::Client::default(),
-            youtube_client: youtube_api::YoutubeApi::new(youtube_key),
+            youtube_client: youtube::YoutubeClient::new(youtube_api::YoutubeApi::new(youtube_key)),
         }
     }
 }

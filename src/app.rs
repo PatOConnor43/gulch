@@ -58,9 +58,8 @@ fn demo(task: Json<TaskRequest>) -> Json<TaskResponse> {
     Json(TaskResponse { id: 0 })
 }
 
-pub fn start() {
+pub fn start() -> rocket::Rocket {
     rocket::ignite()
         .manage(resolver::Resolver::default())
         .mount("/api", routes![api::search])
-        .launch();
 }
